@@ -1,0 +1,53 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="設定">
+
+        <EditTextPreference
+            app:defaultValue="0.0.0.0"
+            app:key="local_host"
+            app:title="本機"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:defaultValue="0.0.0.0"
+            app:key="connect_host"
+            app:title="對方主機"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:defaultValue="1212"
+            app:key="port"
+            app:title="連線埠"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="關於">
+
+        <EditTextPreference
+            app:defaultValue="1.0"
+            app:enabled="false"
+            app:key="build"
+            app:shouldDisableView="false"
+            app:title="版本"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:defaultValue="鍾仁景\nchungjenching@gmail.com"
+            app:enabled="false"
+            app:key="author"
+            app:shouldDisableView="false"
+            app:title="開發人員"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:defaultValue="聊天程式"
+            app:enabled="false"
+            app:key="release_note"
+            app:shouldDisableView="false"
+            app:title="功能"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
