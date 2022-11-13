@@ -9,7 +9,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
-            app:defaultValue="0.0.0.0"
+            app:defaultValue=""
             app:key="connect_host"
             app:title="對方主機"
             app:useSimpleSummaryProvider="true" />

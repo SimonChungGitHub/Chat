@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -47,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout msgBox;
     private TextView listeningMsg;
     private Thread listening;
+    private Snackbar snackbar;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (snackbar != null) {
+            snackbar.dismiss();
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,8 +165,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean client(String sendMsg) {
-        if (connect_host.equals("") || connect_host.equals("0.0.0.0")) {
-            Snackbar.make(msgBox, "連線主機未設定", Snackbar.LENGTH_LONG).show();
+        if (connect_host.equals("")) {
+            snackbar = Snackbar.make(msgBox, "對方IP未設定", Snackbar.LENGTH_LONG);
+            snackbar.show();
             return false;
         }
         try (SocketChannel socketChannel = SocketChannel.open()) {
