@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/androidTest/java/com/simon/socket/ExampleInstrumentedTest.java
+/app/src/test/java/com/simon/socket/ExampleUnitTest.java
+/.idea/misc.xml
+/app/release/output-metadata.json
