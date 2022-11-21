@@ -1,4 +1,4 @@
-package com.simon.socket;
+package com.simon.chat;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -14,10 +14,15 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
+
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QRCodeActivity extends MainActivity {
     protected SharedPreferences preferences;
@@ -51,7 +56,6 @@ public class QRCodeActivity extends MainActivity {
             finish();
         });
     }
-
 
     @Override
     protected void onResume() {
@@ -99,10 +103,12 @@ public class QRCodeActivity extends MainActivity {
     public void genCode() {
         String content = local_host + ":" + port;
         ImageView ivCode = findViewById(R.id.qrcode);
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.putIfAbsent(EncodeHintType.CHARACTER_SET, StandardCharsets.UTF_8);
         BarcodeEncoder encoder = new BarcodeEncoder();
         try {
             Bitmap bit = encoder.encodeBitmap(content, BarcodeFormat.QR_CODE,
-                    500, 500);
+                    500, 500, hints);
             ivCode.setImageBitmap(bit);
         } catch (WriterException e) {
             e.printStackTrace();

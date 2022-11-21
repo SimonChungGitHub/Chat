@@ -3,15 +3,21 @@
     <PreferenceCategory app:title="設定">
 
         <EditTextPreference
+            app:defaultValue="無"
+            app:key="user_name"
+            app:title="姓名"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
             app:defaultValue="0.0.0.0"
             app:key="local_host"
-            app:title="本機"
+            app:title="@string/local_host"
             app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
             app:defaultValue=""
             app:key="connect_host"
-            app:title="對方主機"
+            app:title="@string/connect_host"
             app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
@@ -19,6 +25,19 @@
             app:key="port"
             app:title="連線埠"
             app:useSimpleSummaryProvider="true" />
+
+        <DropDownPreference
+            app:defaultValue="16"
+            app:entries="@array/reply_entries"
+            app:entryValues="@array/reply_values"
+            app:key="textSize"
+            app:title="字體大小"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:key="sound_send"
+            app:title="傳送/接收音效" />
 
     </PreferenceCategory>
 
