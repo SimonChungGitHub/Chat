@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -50,11 +51,15 @@ public class QRCodeActivity extends MainActivity {
         barcodeView.decodeSingle(result -> {
             sounds.play(beep, 5.0F, 5.0F, 1, 0, 1.0F);
             String[] arr = result.getText().split(":");
-            preferences.edit()
-                    .putString("connect_host", arr[0])
-                    .putString("port", arr[1])
-                    .apply();
-            finish();
+            if (arr.length == 2) {
+                preferences.edit()
+                        .putString("connect_host", arr[0])
+                        .putString("port", arr[1])
+                        .apply();
+                finish();
+            } else {
+                Snackbar.make(findViewById(R.id.activity_qrcode), "不正確的QRCode", Snackbar.LENGTH_LONG).show();
+            }
         });
     }
 
