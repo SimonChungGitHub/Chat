@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,10 +60,11 @@ public class MainActivity extends AppCompatActivity {
     private Intent intent;
     private ServiceConnection myServiceConn;
     private SocketServerService.ServiceBinder binder = null;
-    SoundPool sounds;
-    boolean soundEffect = true;
-    int sound_send;
-    int sound_receive;
+    protected SoundPool sounds;
+    protected boolean soundEffect = true;
+    protected int sound_send;
+    protected int sound_receive;
+    protected int beep;
 
 
     @Override
@@ -83,16 +85,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putString("local_host", getLocalIpAddress()).apply();
-
-        AudioAttributes attributes = new AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build();
         sounds = new SoundPool.Builder()
-                .setAudioAttributes(attributes)
+                .setMaxStreams(AudioManager.STREAM_MUSIC)
                 .build();
         sound_send = sounds.load(this, R.raw.sound_send, 1);
         sound_receive = sounds.load(this, R.raw.sound_receive, 1);
+        beep = sounds.load(this, R.raw.beep, 1);
 
         listeningMsg = findViewById(R.id.listening);
         scrollView = findViewById(R.id.scroll_view);

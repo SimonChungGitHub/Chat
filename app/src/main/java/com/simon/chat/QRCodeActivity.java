@@ -48,6 +48,7 @@ public class QRCodeActivity extends MainActivity {
         captureManager.initializeFromIntent(getIntent(), savedInstanceState);
         barcodeView.setFocusedByDefault(true);
         barcodeView.decodeSingle(result -> {
+            sounds.play(beep, 5.0F, 5.0F, 1, 0, 1.0F);
             String[] arr = result.getText().split(":");
             preferences.edit()
                     .putString("connect_host", arr[0])
