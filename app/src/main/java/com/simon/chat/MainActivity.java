@@ -7,16 +7,11 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.media.SoundPool;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.provider.MediaStore;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     protected int sound_receive;
     protected int beep;
 
-
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (snackbar != null) {
@@ -85,8 +79,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putString("local_host", getLocalIpAddress()).apply();
+        AudioAttributes attributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
         sounds = new SoundPool.Builder()
-                .setMaxStreams(AudioManager.STREAM_MUSIC)
+                .setAudioAttributes(attributes)
                 .build();
         sound_send = sounds.load(this, R.raw.sound_send, 1);
         sound_receive = sounds.load(this, R.raw.sound_receive, 1);
@@ -114,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("msg", msg);
             startService(intent);
             input.setText("");
-            if (soundEffect) {
+            if (sounds != null && soundEffect) {
                 sounds.play(sound_send, 5.0F, 5.0F, 1, 0, 1.0F);
             }
         });
