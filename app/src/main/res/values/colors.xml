@@ -9,4 +9,21 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
+    <color name="transparent">#00FFFFFF</color>
+    <color name="grey">#808080</color>
+    <color name="red">#FF0000</color>
+    <color name="orange">#FFA500</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#008000</color>
+    <color name="blue">#0000FF</color>
+    <color name="indigo">#4B0080</color>
+    <color name="purple">#800080</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="skin">#FFDBAC</color>
+    <color name="brown">#A52A2A</color>
+    <color name="golden">#FFD700</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="dark">#393434</color>
+    <color name="heart">#E30A0A</color>
+
 </resources>
